@@ -8,19 +8,20 @@ import cn.nukkit.utils.*;
 
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 public class RegionCommand extends Command {
     public final RegionManager rgm;
     public final Map<Long, Cuboid> selection;
     public final Logger log;
+    private final FlagsCommands flagsCmds;
 
     public RegionCommand(WorldGuardPlugin p){
         super("rg");
         rgm = p.RegionManager;
         selection = p.Selection;
         log = p.getLogger();
+        flagsCmds = new FlagsCommands(p);
     }
 
     private boolean list(CommandSender sender) {
@@ -43,7 +44,7 @@ public class RegionCommand extends Command {
 
     private boolean create(CommandSender sender, LinkedList<String> args) {
         if(args.isEmpty()){
-            sender.sendMessage("[WG]Missing parameter <rgName>. Usage: /wg rg create <rgName>");
+            sender.sendMessage("[WG]Missing parameter <rgName>. Usage: /rg create <rgName>");
             return false;
         }
 
@@ -72,7 +73,25 @@ public class RegionCommand extends Command {
             player.sendMessage("[WG]Region "+rgn+" already exist");
         }
 
-        sender.sendMessage(TextFormat.YELLOW+"[WG]Region "+rgn+" created"+TextFormat.WHITE);
+        sender.sendMessage(TextFormat.YELLOW+"[WG]Region "+rgn+" created"+TextFormat.RESET);
+        return true;
+    }
+
+    private boolean delete(CommandSender sender, LinkedList<String> args){
+        if(args.isEmpty()){
+            sender.sendMessage(TextFormat.RED+"[WG]Missing parameter. Usage: /rg delete <rgName>"+TextFormat.RESET);
+            return false;
+        }
+
+        String rgn = args.getFirst();
+        var reg = rgm.getByName(rgn);
+        if(reg == null){
+            sender.sendMessage(TextFormat.RED+"[WG]No region "+rgn+" doesn't exist"+TextFormat.RESET);
+            return false;
+        }
+
+        rgm.delete(reg);
+
         return true;
     }
 
@@ -85,83 +104,17 @@ public class RegionCommand extends Command {
         switch(sub){
             case "create":
                 return create(sender, largs);
+            case "delete":
+                return delete(sender, largs);
             case "list":
                 return list(sender);
             case "flag":
-                return flag(sender, largs);
+                return flagsCmds.flag(sender, largs);
             case "flags":
-                return getFlags(sender, largs);
+                return flagsCmds.getFlags(sender, largs);
             default:
-                sender.sendMessage("[WG]Unknown wg rg sub-command: "+ sub);
+                sender.sendMessage(TextFormat.RED+"[WG]Unknown /rg sub-command: "+ sub+TextFormat.RESET);
                 return false;
         }
-    }
-
-    private boolean getFlags(CommandSender sender, LinkedList<String> largs) {
-        if(largs.isEmpty())
-            return false;
-
-        String rgn = largs.peekFirst();
-        var reg = rgm.getByName(rgn);
-        if(reg == null){
-            sender.sendMessage(TextFormat.RED+"[WG]No region "+rgn+" doesn't exist"+TextFormat.WHITE);
-            return false;
-        }
-
-        var msg = new StringBuilder(TextFormat.YELLOW+"[WG]Region flags: ");
-
-        for(var f: reg.Deny)
-            msg.append(f).append(" deny, ");
-
-        msg.deleteCharAt(msg.length() -2);
-        msg.append(TextFormat.WHITE);
-        sender.sendMessage(msg.toString());
-
-        return true;
-    }
-
-    private boolean flag(CommandSender sender, List<String> args) {
-        if(args.size() < 3){
-            sender.sendMessage(TextFormat.RED+"[WG]Insufficient arguments. Usage: /rg flag <region> <flag> <deny|allow>"+TextFormat.WHITE);
-            return false;
-        }
-
-        var reg = rgm.getByName(args.get(0));
-        if(reg == null){
-            sender.sendMessage(TextFormat.RED+"[WG]No region "+args.get(0)+" doesn't exist"+TextFormat.WHITE);
-            return false;
-        }
-
-        FlagType flag;
-        String flagName = args.get(1).toLowerCase();
-        switch(flagName){
-            case "block-break":
-                flag = FlagType.Block_break;
-                break;
-            case "block-place":
-                flag = FlagType.Block_place;
-                break;
-            case "mob-spawning":
-                flag = FlagType.Mob_spawning;
-                break;
-            default:
-                sender.sendMessage(TextFormat.RED+"[WG]Flag: "+flagName+" doesn't exist"+TextFormat.WHITE);
-                return false;
-        }
-
-        switch (args.get(2)){
-            case "deny":
-                reg.Deny.add(flag);
-                break;
-            case "allow":
-                reg.Deny.remove(flag);
-                break;
-            default:
-                sender.sendMessage(TextFormat.RED+"[WG]Invalid flag modifier: "+args.get(2)+TextFormat.WHITE);
-                return false;
-        }
-
-        sender.sendMessage(TextFormat.DARK_GREEN+"[WG]Region flag added"+TextFormat.WHITE);
-        return true;
     }
 }

@@ -1,6 +1,7 @@
 package aldrigos.mc.worldguard;
 
 import aldrigos.mc.worldguard.exceptions.AlreadyExistException;
+import cn.nukkit.level.Position;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.Logger;
 
@@ -26,6 +27,10 @@ public class RegionManager {
         return null;
     }
 
+    public Region getBlockRegion(Position p){
+        return getBlockRegion(p.level.getId(), p);
+    }
+
     public Region getBlockRegion(int worldId, Vector3 pos){
         //log.info("[WG-Debug] Block pos: "+Utils.toString(pos));
         var rgs = Regions.get(worldId);
@@ -46,5 +51,11 @@ public class RegionManager {
             Regions.put(worldId, new ArrayList<>());
 
         Regions.get(worldId).add(r);
+    }
+
+    public void delete(Region reg) {
+        for(var rc: Regions.values())
+            if(rc.remove(reg))
+                break;
     }
 }

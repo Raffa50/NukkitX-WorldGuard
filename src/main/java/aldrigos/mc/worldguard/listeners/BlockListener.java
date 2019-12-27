@@ -21,7 +21,7 @@ public class BlockListener implements Listener {
         if(p.isCreative())
             return null;
 
-        return rgm.getBlockRegion(p.level.getId(), e.getBlock().getLocation());
+        return rgm.getBlockRegion(e.getBlock().getLocation());
     }
 
     @EventHandler
@@ -30,8 +30,10 @@ public class BlockListener implements Listener {
         if(region == null)
             return;
 
-        if(region.Deny.contains(FlagType.Block_place))
+        if(region.Deny.contains(FlagType.Block_place)) {
+            e.getPlayer().sendMessage(TextFormat.RED+"[WG]Region is protected"+TextFormat.RESET);
             e.setCancelled();
+        }
     }
 
     @EventHandler
@@ -54,7 +56,9 @@ public class BlockListener implements Listener {
         if(region == null)
             return;
 
-        if(region.Deny.contains(FlagType.Block_break))
+        if(region.Deny.contains(FlagType.Block_break)) {
+            e.getPlayer().sendMessage(TextFormat.RED+"[WG]Region is protected"+TextFormat.RESET);
             e.setCancelled();
+        }
     }
 }

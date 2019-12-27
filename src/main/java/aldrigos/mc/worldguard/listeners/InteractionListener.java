@@ -2,7 +2,9 @@ package aldrigos.mc.worldguard.listeners;
 
 import aldrigos.mc.worldguard.*;
 import aldrigos.mc.worldguard.Utils;
+import cn.nukkit.Player;
 import cn.nukkit.event.*;
+import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.utils.*;
 
@@ -17,6 +19,29 @@ public class InteractionListener implements Listener {
         rgm = p.RegionManager;
         log = p.getLogger();
         selection = p.Selection;
+    }
+
+    @EventHandler
+    public void onAttack(EntityDamageByEntityEvent e){
+        if(!(e.getDamager() instanceof Player))
+            return;
+        var player = (Player) e.getDamager();
+
+        var reg = rgm.getBlockRegion(e.getEntity().getLocation());
+        if(reg == null)
+            return;
+
+        if(e.getEntity() instanceof Player){
+            if(reg.Deny.contains(FlagType.Pvp)){
+                e.setCancelled();
+                player.sendMessage(TextFormat.RED+"[WG]Pvp is denied in this region"+TextFormat.RESET);
+            }
+        }else{ //creature
+            if(reg.Deny.contains(FlagType.Damage_animals)){
+                e.setCancelled();
+                player.sendMessage(TextFormat.RED+"[WG]Mob damage is denied in this region"+TextFormat.RESET);
+            }
+        }
     }
 
     @EventHandler

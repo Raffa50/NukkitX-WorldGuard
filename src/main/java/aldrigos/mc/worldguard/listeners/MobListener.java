@@ -18,7 +18,7 @@ public class MobListener implements Listener {
         if(!e.isCreature())
             return;
 
-        var reg = rgm.getBlockRegion(e.getPosition().level.getId(), e.getPosition());
+        var reg = rgm.getBlockRegion(e.getPosition());
         if(reg == null)
             return;
 
