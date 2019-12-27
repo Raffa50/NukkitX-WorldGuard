@@ -27,7 +27,7 @@ class FlagsCommands {
 
         var msg = new StringBuilder(TextFormat.YELLOW+"[WG]Region flags: ");
 
-        for(var f: reg.Deny)
+        for(var f: reg.getDenied())
             msg.append(f).append(" deny, ");
 
         msg.deleteCharAt(msg.length() -2);
@@ -75,10 +75,10 @@ class FlagsCommands {
 
         switch (args.get(2)){
             case "deny":
-                reg.Deny.add(flag);
+                reg.setDenied(flag);
                 break;
             case "allow":
-                reg.Deny.remove(flag);
+                reg.setAllowed(flag);
                 break;
             default:
                 sender.sendMessage(TextFormat.RED+"[WG]Invalid flag modifier: "+args.get(2)+TextFormat.RESET);

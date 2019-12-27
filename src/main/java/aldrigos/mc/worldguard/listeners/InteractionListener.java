@@ -32,12 +32,12 @@ public class InteractionListener implements Listener {
             return;
 
         if(e.getEntity() instanceof Player){
-            if(reg.Deny.contains(FlagType.Pvp)){
+            if(reg.isDenied(FlagType.Pvp)){
                 e.setCancelled();
                 player.sendMessage(TextFormat.RED+"[WG]Pvp is denied in this region"+TextFormat.RESET);
             }
         }else{ //creature
-            if(reg.Deny.contains(FlagType.Damage_animals)){
+            if(reg.isDenied(FlagType.Damage_animals)){
                 e.setCancelled();
                 player.sendMessage(TextFormat.RED+"[WG]Mob damage is denied in this region"+TextFormat.RESET);
             }

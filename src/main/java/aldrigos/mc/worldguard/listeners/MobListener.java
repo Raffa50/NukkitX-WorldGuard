@@ -22,7 +22,7 @@ public class MobListener implements Listener {
         if(reg == null)
             return;
 
-        if(reg.Deny.contains(FlagType.Mob_spawning))
+        if(reg.isDenied(FlagType.Mob_spawning))
             e.setCancelled();
     }
 }
