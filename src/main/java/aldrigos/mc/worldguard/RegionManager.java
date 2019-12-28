@@ -9,7 +9,7 @@ import java.util.*;
 
 public class RegionManager {
     private Map<Integer, Collection<Region>> Regions = new HashMap<>();
-    private final Logger log;
+    private final transient Logger log;
 
     public RegionManager(WorldGuardPlugin p){
         log = p.getLogger();
