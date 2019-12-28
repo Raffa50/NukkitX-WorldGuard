@@ -11,8 +11,7 @@ public class Region extends Cuboid {
     public Region(){}
 
     public Region(Cuboid c, String name){
-        P1 = c.P1;
-        P2 = c.P2;
+        set(c);
         this.Name = name;
     }
 
@@ -38,5 +37,10 @@ public class Region extends Cuboid {
 
     public Iterable<FlagType> getForbids(){
         return Deny;
+    }
+
+    public void set(Cuboid cuboid) {
+        P1 = cuboid.P1;
+        P2 = cuboid.P2;
     }
 }

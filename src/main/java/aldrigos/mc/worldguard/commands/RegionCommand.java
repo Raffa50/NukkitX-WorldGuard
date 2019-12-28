@@ -106,6 +106,8 @@ public class RegionCommand extends Command {
                 return create(sender, largs);
             case "delete":
                 return delete(sender, largs);
+            case "update":
+                return update(sender, largs);
             case "list":
                 return list(sender);
             case "flag":
@@ -116,5 +118,36 @@ public class RegionCommand extends Command {
                 sender.sendMessage(TextFormat.RED+"[WG]Unknown /rg sub-command: "+ sub+TextFormat.RESET);
                 return false;
         }
+    }
+
+    private boolean update(CommandSender sender, LinkedList<String> args) {
+        if(args.isEmpty()){
+            sender.sendMessage(TextFormat.RED+"[WG]Missing parameter. Usage: /rg update <rgName>"+TextFormat.RESET);
+            return false;
+        }
+
+        if(!sender.isPlayer()){
+            sender.sendMessage("[WG]This is a player command!");
+            return false;
+        }
+        var player = (Player)sender;
+
+        String rgn = args.pop();
+        var reg = rgm.getByName(rgn);
+        if(reg == null){
+            sender.sendMessage(TextFormat.RED+"[WG]No region "+rgn+" doesn't exist"+TextFormat.RESET);
+            return false;
+        }
+
+        var cuboid = selection.get(player.getId());
+        if(cuboid == null || cuboid.P1 == null || cuboid.P2 == null){
+            player.sendMessage("[WG]No selection was made");
+            return false;
+        }
+
+        reg.set(cuboid);
+        player.sendMessage("[WG]Region updated");
+
+        return true;
     }
 }
