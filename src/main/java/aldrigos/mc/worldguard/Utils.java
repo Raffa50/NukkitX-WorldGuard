@@ -2,6 +2,8 @@ package aldrigos.mc.worldguard;
 
 import cn.nukkit.math.Vector3;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -14,5 +16,11 @@ public final class Utils {
 
     public static String toString(Vector3 p){
         return "X:" + p.x + " Y:" + p.y + " Z:" + p.z;
+    }
+
+    public static String getTrace(Throwable e){
+        var sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        return sw.toString();
     }
 }

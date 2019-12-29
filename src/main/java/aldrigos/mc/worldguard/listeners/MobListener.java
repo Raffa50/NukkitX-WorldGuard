@@ -16,18 +16,21 @@ public class MobListener implements Listener {
 
     @EventHandler
     public void onSpawn(EntitySpawnEvent e){
+        Region reg = null;
         try {
             if (!e.isCreature() || e.getPosition() == null)
                 return;
 
-            var reg = rgm.getBlockRegion(e.getPosition());
+            reg = rgm.getBlockRegion(e.getPosition());
             if (reg == null)
                 return;
+        } catch(Exception ex){
+            log.error("[WG]Exception"+Utils.getTrace(ex));
+        }
 
+        try {
             if (reg.isDenied(FlagType.Mob_spawning))
                 e.setCancelled();
-        } catch(Exception ex){
-            log.error("[WG]Exception"+ex.getStackTrace());
-        }
+        }catch(Exception ex){}
     }
 }

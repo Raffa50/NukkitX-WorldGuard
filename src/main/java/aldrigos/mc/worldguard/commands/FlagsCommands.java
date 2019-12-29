@@ -66,7 +66,7 @@ class FlagsCommands {
         String flagName = args.get(1).toLowerCase();
         var json = new Gson();
         FlagType flag = json.fromJson(flagName, FlagType.class);
-        
+
         if(flag == null){
             sender.sendMessage(TextFormat.RED+"[WG]Flag: "+flagName+" doesn't exist"+TextFormat.RESET);
             return false;

@@ -4,8 +4,7 @@ import aldrigos.mc.worldguard.*;
 import aldrigos.mc.worldguard.Utils;
 import cn.nukkit.Player;
 import cn.nukkit.event.*;
-import cn.nukkit.event.entity.EntityDamageByEntityEvent;
-import cn.nukkit.event.entity.ExplosionPrimeEvent;
+import cn.nukkit.event.entity.*;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.utils.*;
 
@@ -71,6 +70,16 @@ public class InteractionListener implements Listener {
 
     @EventHandler
     public void onExplode(ExplosionPrimeEvent e){
+        var reg = rgm.getBlockRegion(e.getEntity().getPosition());
+        if(reg == null)
+            return;
+
+        if(reg.isDenied(FlagType.Explosions))
+            e.setCancelled();
+    }
+
+    @EventHandler
+    public void onExplode(EntityExplosionPrimeEvent e){
         var reg = rgm.getBlockRegion(e.getEntity().getPosition());
         if(reg == null)
             return;

@@ -23,7 +23,7 @@ public class WorldGuardPlugin extends PluginBase {
             try(var reader = new BufferedReader(new FileReader(file))){
                 RegionManager = json.fromJson(reader, RegionManager.class);
             } catch (Exception e) {
-                log.error("[WG]Exception: "+e.getStackTrace());
+                log.error("[WG]Exception: "+Utils.getTrace(e));
                 return false;
             }
         }else
@@ -40,7 +40,7 @@ public class WorldGuardPlugin extends PluginBase {
         try(var writer = new PrintWriter(regionFile, "UTF-8")){
             writer.print(json.toJson(RegionManager));
         } catch (Exception e) {
-            log.error("[WG]Exception: "+e.getStackTrace());
+            log.error("[WG]Exception: "+Utils.getTrace(e));
         }
     }
 
