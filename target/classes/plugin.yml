@@ -23,8 +23,24 @@ permissions:
         default: true
       wg.rg.create:
         default: true
+      wg.rg.update:
+        default: true
+      wg.rg.delete:
+        default: true
+      wg.rg.flags:
+        default: true
+      wg.rg.flag:
+        default: true
 
   wg.rg.list:
-    default: true
+    default: false
   wg.rg.create:
+    default: false
+  wg.rg.update:
+    default: false
+  wg.rg.delete:
+    default: false
+  wg.rg.flags:
+    default: false
+  wg.rg.flag:
     default: false

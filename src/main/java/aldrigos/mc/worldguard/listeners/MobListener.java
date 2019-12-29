@@ -1,8 +1,6 @@
 package aldrigos.mc.worldguard.listeners;
 
-import aldrigos.mc.worldguard.FlagType;
-import aldrigos.mc.worldguard.RegionManager;
-import aldrigos.mc.worldguard.WorldGuardPlugin;
+import aldrigos.mc.worldguard.*;
 import cn.nukkit.event.*;
 import cn.nukkit.event.entity.EntitySpawnEvent;
 
@@ -15,7 +13,7 @@ public class MobListener implements Listener {
 
     @EventHandler
     public void onSpawn(EntitySpawnEvent e){
-        if(!e.isCreature())
+        if(!e.isCreature() || e.getPosition() == null)
             return;
 
         var reg = rgm.getBlockRegion(e.getPosition());

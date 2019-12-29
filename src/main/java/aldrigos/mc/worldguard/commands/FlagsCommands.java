@@ -15,8 +15,15 @@ class FlagsCommands {
     }
 
     public boolean getFlags(CommandSender sender, LinkedList<String> largs) {
-        if(largs.isEmpty())
+        if(!sender.hasPermission("wg.rg.flags")){
+            sender.sendMessage(TextFormat.RED+"[WG]No permission for wg.rg.flags"+TextFormat.RESET);
             return false;
+        }
+
+        if(largs.isEmpty()) {
+            sender.sendMessage(TextFormat.RED+"[WG]Insufficient arguments. Usage: /rg flags <rgName>"+TextFormat.RESET);
+            return false;
+        }
 
         String rgn = largs.peekFirst();
         var reg = rgm.getByName(rgn);
@@ -38,6 +45,11 @@ class FlagsCommands {
     }
 
     public boolean flag(CommandSender sender, List<String> args) {
+        if(!sender.hasPermission("wg.rg.flag")){
+            sender.sendMessage(TextFormat.RED+"[WG]No permission for wg.rg.flag"+TextFormat.RESET);
+            return false;
+        }
+
         if(args.size() < 3){
             sender.sendMessage(TextFormat.RED+"[WG]Insufficient arguments. Usage: /rg flag <region> <flag> <deny|allow>"+TextFormat.RESET);
             return false;

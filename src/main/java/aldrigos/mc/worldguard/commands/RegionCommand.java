@@ -25,8 +25,8 @@ public class RegionCommand extends Command {
     }
 
     private boolean list(CommandSender sender) {
-        if(sender.isPlayer() && !sender.hasPermission("wg.rg.list")){
-            log.info("No permission for wg.rg.list");
+        if(!sender.hasPermission("wg.rg.list")){
+            sender.sendMessage(TextFormat.RED+"[WG]No permission for wg.rg.list"+TextFormat.RESET);
             return false;
         }
 
@@ -43,6 +43,11 @@ public class RegionCommand extends Command {
     }
 
     private boolean create(CommandSender sender, LinkedList<String> args) {
+        if(!sender.hasPermission("wg.rg.create")){
+            sender.sendMessage(TextFormat.RED+"[WG]No permission for wg.rg.create"+TextFormat.RESET);
+            return false;
+        }
+
         if(args.isEmpty()){
             sender.sendMessage("[WG]Missing parameter <rgName>. Usage: /rg create <rgName>");
             return false;
@@ -78,6 +83,11 @@ public class RegionCommand extends Command {
     }
 
     private boolean delete(CommandSender sender, LinkedList<String> args){
+        if(!sender.hasPermission("wg.rg.delete")){
+            sender.sendMessage(TextFormat.RED+"[WG]No permission for wg.rg.delete"+TextFormat.RESET);
+            return false;
+        }
+
         if(args.isEmpty()){
             sender.sendMessage(TextFormat.RED+"[WG]Missing parameter. Usage: /rg delete <rgName>"+TextFormat.RESET);
             return false;
@@ -121,6 +131,11 @@ public class RegionCommand extends Command {
     }
 
     private boolean update(CommandSender sender, LinkedList<String> args) {
+        if(!sender.hasPermission("wg.rg.update")){
+            sender.sendMessage(TextFormat.RED+"[WG]No permission for wg.rg.update"+TextFormat.RESET);
+            return false;
+        }
+
         if(args.isEmpty()){
             sender.sendMessage(TextFormat.RED+"[WG]Missing parameter. Usage: /rg update <rgName>"+TextFormat.RESET);
             return false;
