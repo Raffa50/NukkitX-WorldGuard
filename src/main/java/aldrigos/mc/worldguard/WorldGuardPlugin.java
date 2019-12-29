@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WorldGuardPlugin extends PluginBase {
-    private static final String regionFile = "regions.dat";
+    private static final String regionFile = "plugins/worldguard/regions.json";
     public final Map<Long, Cuboid> Selection= new HashMap<>();
     public RegionManager RegionManager;
     private Logger log;
@@ -35,16 +35,19 @@ public class WorldGuardPlugin extends PluginBase {
     private void save(){
         var file = new File(regionFile);
         try {
+            var dir = new File("plugins/worldguard");
+            dir.mkdir();
             file.createNewFile();
         } catch (IOException e) {
             log.error("[WG]Exception: "+e.getStackTrace());
+            return;
         }
 
         var json = new Gson();
         try(var writer = new PrintWriter("the-file-name.txt", "UTF-8")){
-            writer.println(json.toJson(RegionManager));
+            writer.print(json.toJson(RegionManager));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("[WG]Exception: "+e.getStackTrace());
         }
 
     }
