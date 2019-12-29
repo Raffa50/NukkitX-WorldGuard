@@ -64,7 +64,7 @@ class FlagsCommands {
 
         FlagType flag;
         String flagName = args.get(1).toLowerCase();
-        switch(flagName){
+        switch(flagName){ //TODO improve with reflection/deserialization
             case "block-break":
                 flag = FlagType.Block_break;
                 break;
@@ -79,6 +79,9 @@ class FlagsCommands {
                 break;
             case "damage-animals":
                 flag = FlagType.Damage_animals;
+                break;
+            case "explosions":
+                flag = FlagType.Explosions;
                 break;
             default:
                 sender.sendMessage(TextFormat.RED+"[WG]Flag: "+flagName+" doesn't exist"+TextFormat.RESET);

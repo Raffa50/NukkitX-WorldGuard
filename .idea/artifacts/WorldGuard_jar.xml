@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact build-on-make="true" name="WorldGuard:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/WorldGuard_jar</output-path>
+    <output-path>$PROJECT_DIR$/out</output-path>
     <root id="root">
       <element id="archive" name="WorldGuard.jar">
         <element id="module-output" name="WorldGuard" />

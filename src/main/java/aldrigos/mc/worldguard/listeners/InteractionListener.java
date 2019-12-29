@@ -5,6 +5,7 @@ import aldrigos.mc.worldguard.Utils;
 import cn.nukkit.Player;
 import cn.nukkit.event.*;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
+import cn.nukkit.event.entity.ExplosionPrimeEvent;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.utils.*;
 
@@ -64,7 +65,17 @@ public class InteractionListener implements Listener {
                 selection.put(player.getId(), new Cuboid());
 
             selection.get(player.getId()).P2 = new Vector3Adapter(clickPosition);
-            player.sendMessage(TextFormat.DARK_PURPLE+"Second position set "+ Utils.toString(clickPosition)+TextFormat.WHITE);
+            player.sendMessage(TextFormat.DARK_PURPLE+"[WG]Second position set "+ Utils.toString(clickPosition)+TextFormat.WHITE);
         }
+    }
+
+    @EventHandler
+    public void onExplode(ExplosionPrimeEvent e){
+        var reg = rgm.getBlockRegion(e.getEntity().getPosition());
+        if(reg == null)
+            return;
+
+        if(reg.isDenied(FlagType.Explosions))
+            e.setCancelled();
     }
 }
