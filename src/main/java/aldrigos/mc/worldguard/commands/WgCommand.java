@@ -27,7 +27,6 @@ public class WgCommand extends Command {
             return false;
 
         final String sub = args[0];
-        IWGCommand executor;
 
         switch (sub){
             case "info":
