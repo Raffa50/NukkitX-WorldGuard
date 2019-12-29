@@ -5,14 +5,16 @@ import java.util.HashSet;
 
 public class Region extends Cuboid {
     private String Name;
+    public long Owner;
     public String Greeting;
     private Collection<FlagType> Deny = new HashSet<>();
 
     public Region(){}
 
-    public Region(Cuboid c, String name){
+    public Region(Cuboid c, String name, long owner){
         set(c);
         this.Name = name;
+        this.Owner = owner;
     }
 
     public boolean isDenied(FlagType flag){

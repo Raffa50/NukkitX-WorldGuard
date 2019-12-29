@@ -73,7 +73,7 @@ public class RegionCommand extends Command {
 
         String rgn = args.peekFirst();
         try {
-            rgm.add(worldId, new Region(cuboid, rgn));
+            rgm.add(worldId, new Region(cuboid, rgn, player.getId()));
         } catch (AlreadyExistException e) {
             player.sendMessage("[WG]Region "+rgn+" already exist");
         }

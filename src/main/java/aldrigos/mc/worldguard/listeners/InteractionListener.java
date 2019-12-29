@@ -63,7 +63,7 @@ public class InteractionListener implements Listener {
             if(!selection.containsKey(player.getId()))
                 selection.put(player.getId(), new Cuboid());
 
-            selection.get(player.getId()).P2 = clickPosition;
+            selection.get(player.getId()).P2 = new Vector3Adapter(clickPosition);
             player.sendMessage(TextFormat.DARK_PURPLE+"Second position set "+ Utils.toString(clickPosition)+TextFormat.WHITE);
         }
     }

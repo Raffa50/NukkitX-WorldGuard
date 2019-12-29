@@ -45,7 +45,7 @@ public class BlockListener implements Listener {
             if(!selection.containsKey(player.getId()))
                 selection.put(player.getId(), new Cuboid());
 
-            selection.get(player.getId()).P1 = clickPosition;
+            selection.get(player.getId()).P1 = new Vector3Adapter(clickPosition);
             player.sendMessage(TextFormat.DARK_PURPLE+"[WG]First position set "+Utils.toString(clickPosition)+TextFormat.WHITE);
 
             e.setCancelled();

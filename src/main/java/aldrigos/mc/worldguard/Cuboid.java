@@ -3,7 +3,7 @@ package aldrigos.mc.worldguard;
 import cn.nukkit.math.Vector3;
 
 public class Cuboid {
-    public Vector3 P1, P2;
+    public Vector3Adapter P1, P2;
 
     public boolean contains(Vector3 block){
         double x1, x2, y1, y2, z1, z2;

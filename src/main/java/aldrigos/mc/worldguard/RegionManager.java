@@ -34,6 +34,9 @@ public class RegionManager {
     public Region getBlockRegion(int worldId, Vector3 pos){
         //log.info("[WG-Debug] Block pos: "+Utils.toString(pos));
         var rgs = Regions.get(worldId);
+        if(rgs == null)
+            return null;
+
         for (var r: rgs) {
             if(r.contains(pos))
                 return r;

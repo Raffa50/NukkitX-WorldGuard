@@ -33,23 +33,15 @@ public class WorldGuardPlugin extends PluginBase {
     }
 
     private void save(){
-        var file = new File(regionFile);
-        try {
-            var dir = new File("plugins/worldguard");
-            dir.mkdir();
-            file.createNewFile();
-        } catch (IOException e) {
-            log.error("[WG]Exception: "+e.getStackTrace());
-            return;
-        }
+        var dir = new File("plugins/worldguard");
+        dir.mkdir();
 
         var json = new Gson();
-        try(var writer = new PrintWriter("the-file-name.txt", "UTF-8")){
+        try(var writer = new PrintWriter(regionFile, "UTF-8")){
             writer.print(json.toJson(RegionManager));
         } catch (Exception e) {
             log.error("[WG]Exception: "+e.getStackTrace());
         }
-
     }
 
     @Override
