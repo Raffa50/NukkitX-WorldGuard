@@ -7,12 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45f7b974-1082-4f63-bc58-6196e8c161c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/WorldGuard_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/WorldGuard_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/FlagType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/FlagType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/commands/FlagsCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/commands/FlagsCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/InteractionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/InteractionListener.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -30,22 +26,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/InteractionListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+            <state relative-caret-position="377">
+              <caret line="67" column="59" selection-start-line="67" selection-start-column="59" selection-end-line="67" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#onAttack#0;class#InteractionListener#0" />
-                <element signature="method#onPlayerInteract#0;class#InteractionListener#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/commands/FlagsCommands.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="66" column="72" selection-start-line="66" selection-start-column="72" selection-end-line="66" selection-end-column="72" />
+            <state relative-caret-position="320">
+              <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#getFlags#0;class#FlagsCommands#0" />
@@ -54,11 +49,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/BlockListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="387">
+              <caret line="47" column="66" lean-forward="true" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="66" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/FlagType.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+            <state relative-caret-position="360">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
@@ -110,9 +117,9 @@
         <option value="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/BlockListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/MobListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/WorldGuardPlugin.java" />
-        <option value="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/commands/FlagsCommands.java" />
-        <option value="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/InteractionListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/FlagType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/InteractionListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/commands/FlagsCommands.java" />
       </list>
     </option>
   </component>
@@ -180,6 +187,15 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="worldguard" type="462c0819:PsiDirectoryNode" />
               <item name="commands" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WorldGuard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WorldGuard" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="worldguard" type="462c0819:PsiDirectoryNode" />
+              <item name="listeners" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WorldGuard" type="b2602c69:ProjectViewProjectNode" />
@@ -538,16 +554,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/BlockListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="47" column="66" lean-forward="true" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/MobListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -582,17 +588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/commands/FlagsCommands.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="66" column="72" selection-start-line="66" selection-start-column="72" selection-end-line="66" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getFlags#0;class#FlagsCommands#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="640">
@@ -600,22 +595,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/InteractionListener.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/FlagType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        <state relative-caret-position="360">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/BlockListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="47" column="66" lean-forward="true" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#onAttack#0;class#InteractionListener#0" />
-            <element signature="method#onPlayerInteract#0;class#InteractionListener#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/FlagType.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/listeners/InteractionListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+        <state relative-caret-position="377">
+          <caret line="67" column="59" selection-start-line="67" selection-start-column="59" selection-end-line="67" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onAttack#0;class#InteractionListener#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aldrigos/mc/worldguard/commands/FlagsCommands.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getFlags#0;class#FlagsCommands#0" />
+          </folding>
         </state>
       </provider>
     </entry>

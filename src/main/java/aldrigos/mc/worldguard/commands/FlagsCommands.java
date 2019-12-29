@@ -3,6 +3,7 @@ package aldrigos.mc.worldguard.commands;
 import aldrigos.mc.worldguard.*;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.utils.TextFormat;
+import com.google.gson.Gson;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -62,30 +63,13 @@ class FlagsCommands {
             return false;
         }
 
-        FlagType flag;
         String flagName = args.get(1).toLowerCase();
-        switch(flagName){ //TODO improve with reflection/deserialization
-            case "block-break":
-                flag = FlagType.Block_break;
-                break;
-            case "block-place":
-                flag = FlagType.Block_place;
-                break;
-            case "mob-spawning":
-                flag = FlagType.Mob_spawning;
-                break;
-            case "pvp":
-                flag = FlagType.Pvp;
-                break;
-            case "damage-animals":
-                flag = FlagType.Damage_animals;
-                break;
-            case "explosions":
-                flag = FlagType.Explosions;
-                break;
-            default:
-                sender.sendMessage(TextFormat.RED+"[WG]Flag: "+flagName+" doesn't exist"+TextFormat.RESET);
-                return false;
+        var json = new Gson();
+        FlagType flag = json.fromJson(flagName, FlagType.class);
+        
+        if(flag == null){
+            sender.sendMessage(TextFormat.RED+"[WG]Flag: "+flagName+" doesn't exist"+TextFormat.RESET);
+            return false;
         }
 
         switch (args.get(2)){
