@@ -1,46 +1,26 @@
 name: WorldGuard
 main: aldrigos.mc.worldguard.WorldGuardPlugin
-version: "0.1.0"
+version: "0.1.2.0"
 api: ["1.0.5"]
 load: POSTWORLD
 author: Aldrigo Raffaele
 description: WorldGuard Nukkit Port
-website: https://aldrigo.sf.net
+website: https://github.com/Raffa50/NukkitX-WorldGuard
 prefix: "WorldGuard"
 
 permissions:
   wg.*:
     description: "Allows the user to run the wg command"
-    default: false
+    default: op
     children:
-      wg.rg.*:
-        default: true
+      wg.rg.*: true
 
   wg.rg.*:
-    default: false
+    default: op
     children:
-      wg.rg.list:
-        default: true
-      wg.rg.create:
-        default: true
-      wg.rg.update:
-        default: true
-      wg.rg.delete:
-        default: true
-      wg.rg.flags:
-        default: true
-      wg.rg.flag:
-        default: true
-
-  wg.rg.list:
-    default: false
-  wg.rg.create:
-    default: false
-  wg.rg.update:
-    default: false
-  wg.rg.delete:
-    default: false
-  wg.rg.flags:
-    default: false
-  wg.rg.flag:
-    default: false
+      wg.rg.list: true
+      wg.rg.create: true
+      wg.rg.update: true
+      wg.rg.delete: true
+      wg.rg.flags: true
+      wg.rg.flag: true

@@ -1,5 +1,6 @@
 package aldrigos.mc.worldguard;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 public enum FlagType {
@@ -14,5 +15,19 @@ public enum FlagType {
     @SerializedName("damage-animals")
     Damage_animals,
     @SerializedName("explosions")
-    Explosions
+    Explosions,
+    @SerializedName("lighter")
+    Lighter,
+    @SerializedName("fire-spread")
+    Fire_spread,
+    @SerializedName("lava-fire")
+    Lava_fire
+    ;
+
+    private static Gson json = new Gson();
+
+    @Override
+    public String toString(){
+        return json.toJson(this);
+    }
 }

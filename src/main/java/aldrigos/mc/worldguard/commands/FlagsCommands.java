@@ -15,21 +15,21 @@ class FlagsCommands {
         rgm = p.RegionManager;
     }
 
-    public boolean getFlags(CommandSender sender, LinkedList<String> largs) {
+    public boolean getFlags(CommandSender sender, LinkedList<String> args) {
         if(!sender.hasPermission("wg.rg.flags")){
-            sender.sendMessage(TextFormat.RED+"[WG]No permission for wg.rg.flags"+TextFormat.RESET);
+            Messages.NO_PERM.send(sender, "wg.rg.flags");
             return false;
         }
 
-        if(largs.isEmpty()) {
-            sender.sendMessage(TextFormat.RED+"[WG]Insufficient arguments. Usage: /rg flags <rgName>"+TextFormat.RESET);
+        if(args.isEmpty()) {
+            Messages.PARAM_MISS.send(sender, "/rg flags <rgName>");
             return false;
         }
 
-        String rgn = largs.peekFirst();
+        String rgn = args.peekFirst();
         var reg = rgm.getByName(rgn);
         if(reg == null){
-            sender.sendMessage(TextFormat.RED+"[WG]No region "+rgn+" doesn't exist"+TextFormat.RESET);
+            Messages.REGION_NOT_EXIST.send(sender, rgn);
             return false;
         }
 
@@ -47,19 +47,27 @@ class FlagsCommands {
 
     public boolean flag(CommandSender sender, List<String> args) {
         if(!sender.hasPermission("wg.rg.flag")){
-            sender.sendMessage(TextFormat.RED+"[WG]No permission for wg.rg.flag"+TextFormat.RESET);
+            Messages.NO_PERM.send(sender, "wg.rg.flag");
             return false;
         }
 
+        if(args.isEmpty()){ //list all flags
+            var sb = new StringBuilder();
+            for(var f: FlagType.values())
+                sb.append(f).append(" ");
+
+            Messages.FLAG_LIST.send(sender, sb.toString());
+            return true;
+        }
         if(args.size() < 3){
-            sender.sendMessage(TextFormat.RED+"[WG]Insufficient arguments. Usage: /rg flag <region> <flag> <deny|allow>"+TextFormat.RESET);
+            Messages.PARAM_MISS.send(sender, "/rg flag <region> <flag> <deny|allow>");
             return false;
         }
 
         String rgn = args.get(0);
         var reg = rgm.getByName(rgn);
         if(reg == null){
-            sender.sendMessage(TextFormat.RED+"[WG]No region "+rgn+" doesn't exist"+TextFormat.RESET);
+            Messages.REGION_NOT_EXIST.send(sender, rgn);
             return false;
         }
 
@@ -68,7 +76,7 @@ class FlagsCommands {
         FlagType flag = json.fromJson(flagName, FlagType.class);
 
         if(flag == null){
-            sender.sendMessage(TextFormat.RED+"[WG]Flag: "+flagName+" doesn't exist"+TextFormat.RESET);
+            Messages.FLAG_INVALID.send(sender, flagName);
             return false;
         }
 
@@ -80,11 +88,11 @@ class FlagsCommands {
                 reg.setAllowed(flag);
                 break;
             default:
-                sender.sendMessage(TextFormat.RED+"[WG]Invalid flag modifier: "+args.get(2)+TextFormat.RESET);
+                Messages.FLAG_MOD_INVALID.send(sender, args.get(2));
                 return false;
         }
+        Messages.FLAG_ADDED.send(sender, rgn, flagName, args.get(2));
 
-        sender.sendMessage(TextFormat.DARK_GREEN+"[WG]Region "+rgn+" flag "+flagName+" added"+TextFormat.RESET);
         return true;
     }
 }

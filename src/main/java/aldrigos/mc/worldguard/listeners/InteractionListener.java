@@ -3,22 +3,28 @@ package aldrigos.mc.worldguard.listeners;
 import aldrigos.mc.worldguard.*;
 import aldrigos.mc.worldguard.Utils;
 import cn.nukkit.Player;
+import cn.nukkit.block.BlockID;
 import cn.nukkit.event.*;
 import cn.nukkit.event.entity.*;
-import cn.nukkit.event.player.PlayerInteractEvent;
+import cn.nukkit.event.player.*;
+import cn.nukkit.item.ItemID;
 import cn.nukkit.utils.*;
 
 import java.util.Map;
+
+import static cn.nukkit.event.player.PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK;
 
 public class InteractionListener implements Listener {
     private final RegionManager rgm;
     private final Map<Long, Cuboid> selection;
     private final Logger log;
+    private final WorldGuardPlugin wg;
 
     public InteractionListener(WorldGuardPlugin p){
         rgm = p.RegionManager;
         log = p.getLogger();
         selection = p.Selection;
+        wg = p;
     }
 
     @EventHandler
@@ -34,12 +40,12 @@ public class InteractionListener implements Listener {
         if(e.getEntity() instanceof Player){
             if(reg.isDenied(FlagType.Pvp)){
                 e.setCancelled();
-                player.sendMessage(TextFormat.RED+"[WG]Pvp is denied in this region"+TextFormat.RESET);
+                Messages.FLAG_DENIED.send(player, "pvp");
             }
         }else{ //creature
             if(reg.isDenied(FlagType.Damage_animals)){
                 e.setCancelled();
-                player.sendMessage(TextFormat.RED+"[WG]Mob damage is denied in this region"+TextFormat.RESET);
+                Messages.FLAG_DENIED.send(player, "damage mob");
             }
         }
     }
@@ -54,12 +60,12 @@ public class InteractionListener implements Listener {
 
         var item = e.getItem();
         //check if player has wg rg stick
-        if(item == null || item.getId() != Constants.Stick)
+        if(item == null || item.getId() != ItemID.STICK)
             return;
 
         //if(item.getCustomBlockData().)
 
-        if(e.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK){
+        if(e.getAction() == RIGHT_CLICK_BLOCK){
             if(!selection.containsKey(player.getId()))
                 selection.put(player.getId(), new Cuboid());
 
@@ -86,5 +92,37 @@ public class InteractionListener implements Listener {
 
         if(reg.isDenied(FlagType.Explosions))
             e.setCancelled();
+    }
+
+    @EventHandler
+    public void onPlayerBucketEmpty(PlayerBucketEmptyEvent e){
+        if(e.getPlayer().isCreative())
+            return;
+
+        var pos = e.getBlockClicked().getLocation();
+        var reg = rgm.getBlockRegion(pos);
+        if(reg == null)
+            return;
+
+        if(reg.isDenied(FlagType.Block_place)) {
+            e.setCancelled();
+            Messages.REGION_PROTECTED.send(e.getPlayer());
+        }
+    }
+
+    @EventHandler
+    public void onPlayerBucketFill(PlayerBucketFillEvent e){
+        if(e.getPlayer().isCreative())
+            return;
+
+        var pos = e.getBlockClicked().getLocation();
+        var reg = rgm.getBlockRegion(pos);
+        if(reg == null)
+            return;
+
+        if(reg.isDenied(FlagType.Block_break)) {
+            e.setCancelled();
+            Messages.REGION_PROTECTED.send(e.getPlayer());
+        }
     }
 }

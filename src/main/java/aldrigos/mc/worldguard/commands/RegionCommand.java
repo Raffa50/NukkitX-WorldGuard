@@ -9,6 +9,7 @@ import cn.nukkit.utils.*;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class RegionCommand extends Command {
     public final RegionManager rgm;
@@ -26,7 +27,7 @@ public class RegionCommand extends Command {
 
     private boolean list(CommandSender sender) {
         if(!sender.hasPermission("wg.rg.list")){
-            sender.sendMessage(TextFormat.RED+"[WG]No permission for wg.rg.list"+TextFormat.RESET);
+            Messages.NO_PERM.send(sender, "wg.rg.list");
             return false;
         }
 
@@ -44,17 +45,17 @@ public class RegionCommand extends Command {
 
     private boolean create(CommandSender sender, LinkedList<String> args) {
         if(!sender.hasPermission("wg.rg.create")){
-            sender.sendMessage(TextFormat.RED+"[WG]No permission for wg.rg.create"+TextFormat.RESET);
+            Messages.NO_PERM.send(sender, "wg.rg.create");
             return false;
         }
 
         if(args.isEmpty()){
-            sender.sendMessage("[WG]Missing parameter <rgName>. Usage: /rg create <rgName>");
+            Messages.PARAM_MISS.send(sender, "/rg create <rgName>");
             return false;
         }
 
         if(!sender.isPlayer()){
-            sender.sendMessage("[WG]This is a player command!");
+            Messages.PLAYERCMD.send(sender);
             return false;
         }
         var player = (Player)sender;
@@ -67,36 +68,42 @@ public class RegionCommand extends Command {
 
         var cuboid = selection.get(player.getId());
         if(cuboid == null || cuboid.P1 == null || cuboid.P2 == null){
-            player.sendMessage("[WG]No selection was made");
+            Messages.NO_SELECTION.send(player);
             return false;
         }
 
         String rgn = args.peekFirst();
+        //check valid name
+        if(!rgn.matches("[a-zA-Z][a-zA-Z0-9\\-_]*")){
+            Messages.REGION_NAME_INVALID.send(sender, rgn);
+            return false;
+        }
+
         try {
             rgm.add(worldId, new Region(cuboid, rgn, player.getId()));
         } catch (AlreadyExistException e) {
-            player.sendMessage("[WG]Region "+rgn+" already exist");
+            Messages.REGION_EXIST.send(player, rgn);
         }
 
-        sender.sendMessage(TextFormat.YELLOW+"[WG]Region "+rgn+" created"+TextFormat.RESET);
+        Messages.REGION_CREATED.send(player, rgn);
         return true;
     }
 
     private boolean delete(CommandSender sender, LinkedList<String> args){
         if(!sender.hasPermission("wg.rg.delete")){
-            sender.sendMessage(TextFormat.RED+"[WG]No permission for wg.rg.delete"+TextFormat.RESET);
+            Messages.NO_PERM.send(sender, "wg.rg.delete");
             return false;
         }
 
         if(args.isEmpty()){
-            sender.sendMessage(TextFormat.RED+"[WG]Missing parameter. Usage: /rg delete <rgName>"+TextFormat.RESET);
+            Messages.PARAM_MISS.send(sender, "/rg delete <rgName>");
             return false;
         }
 
         String rgn = args.getFirst();
         var reg = rgm.getByName(rgn);
         if(reg == null){
-            sender.sendMessage(TextFormat.RED+"[WG]No region "+rgn+" doesn't exist"+TextFormat.RESET);
+            Messages.REGION_NOT_EXIST.send(sender, rgn);
             return false;
         }
 
@@ -132,17 +139,17 @@ public class RegionCommand extends Command {
 
     private boolean update(CommandSender sender, LinkedList<String> args) {
         if(!sender.hasPermission("wg.rg.update")){
-            sender.sendMessage(TextFormat.RED+"[WG]No permission for wg.rg.update"+TextFormat.RESET);
+            Messages.NO_PERM.send(sender, "wg.rg.update");
             return false;
         }
 
         if(args.isEmpty()){
-            sender.sendMessage(TextFormat.RED+"[WG]Missing parameter. Usage: /rg update <rgName>"+TextFormat.RESET);
+            Messages.PARAM_MISS.send(sender, "/rg update <rgName>");
             return false;
         }
 
         if(!sender.isPlayer()){
-            sender.sendMessage("[WG]This is a player command!");
+            Messages.PLAYERCMD.send(sender);
             return false;
         }
         var player = (Player)sender;
@@ -150,18 +157,18 @@ public class RegionCommand extends Command {
         String rgn = args.pop();
         var reg = rgm.getByName(rgn);
         if(reg == null){
-            sender.sendMessage(TextFormat.RED+"[WG]No region "+rgn+" doesn't exist"+TextFormat.RESET);
+            Messages.REGION_NOT_EXIST.send(sender, rgn);
             return false;
         }
 
         var cuboid = selection.get(player.getId());
         if(cuboid == null || cuboid.P1 == null || cuboid.P2 == null){
-            player.sendMessage("[WG]No selection was made");
+            Messages.NO_SELECTION.send(player);
             return false;
         }
 
         reg.set(cuboid);
-        player.sendMessage("[WG]Region updated");
+        Messages.REGION_UPDATED.send(player, rgn);
 
         return true;
     }
