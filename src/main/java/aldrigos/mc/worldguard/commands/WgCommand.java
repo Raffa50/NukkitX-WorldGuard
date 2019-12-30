@@ -23,8 +23,18 @@ public class WgCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String cmd, String[] args) {
-        if(args.length < 1)
-            return false;
+        if(args.length < 1){
+            sender.sendMessage("[WG]Commands list:\n" +
+                    "/wg info : about this plugin\n"+
+                    "/rg create <region> : create a new region\n" +
+                    "/rg delete <region> : delete a region\n"+
+                    "/rg flag : list all available flags\n"+
+                    "/rg flag <region> <flag> <allow|deny> : add a flag to region\n"+
+                    "/rg flags <region> : show set flags for the region\n"+
+                    "/rg update <region> : change region cuboid with current selection"
+            );
+            return true;
+        }
 
         final String sub = args[0];
 
