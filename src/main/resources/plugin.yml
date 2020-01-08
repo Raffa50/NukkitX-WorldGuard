@@ -1,8 +1,9 @@
 name: WorldGuard
 main: aldrigos.mc.worldguard.WorldGuardPlugin
-version: "0.1.2.1"
+version: "0.2.0.0"
 api: ["1.0.5"]
 load: POSTWORLD
+depend: [ "SWorldEdit" ]
 author: Aldrigo Raffaele
 description: WorldGuard Nukkit Port
 website: https://github.com/Raffa50/NukkitX-WorldGuard

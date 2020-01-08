@@ -1,7 +1,5 @@
 package aldrigos.mc.worldguard;
 
-import cn.nukkit.math.Vector3;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -12,10 +10,6 @@ public final class Utils {
         var result = new ArrayList<T>();
         c.stream().forEach(result::addAll);
         return result;
-    }
-
-    public static String toString(Vector3 p){
-        return "X:" + p.x + " Y:" + p.y + " Z:" + p.z;
     }
 
     public static String getTrace(Throwable e){

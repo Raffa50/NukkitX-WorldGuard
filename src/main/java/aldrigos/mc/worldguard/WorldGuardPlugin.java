@@ -1,5 +1,6 @@
 package aldrigos.mc.worldguard;
 
+import aldrigos.mc.worldedit.*;
 import aldrigos.mc.worldguard.commands.*;
 import aldrigos.mc.worldguard.listeners.*;
 import cn.nukkit.plugin.PluginBase;
@@ -7,12 +8,10 @@ import cn.nukkit.utils.Logger;
 import com.google.gson.Gson;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 
 public class WorldGuardPlugin extends PluginBase {
     private static final String regionFile = "plugins/worldguard/regions.json";
-    public final Map<Long, Cuboid> Selection= new HashMap<>();
+    public WorldEdit worldEdit;
     public RegionManager RegionManager;
     private Logger log;
 
@@ -52,6 +51,8 @@ public class WorldGuardPlugin extends PluginBase {
             this.setEnabled(false);
             return;
         }
+
+        worldEdit = ((WorldEditPlugin) getServer().getPluginManager().getPlugin("SWorldEdit")).getApi();
 
         var pm = this.getServer().getPluginManager();
         pm.registerEvents(new InteractionListener(this), this);

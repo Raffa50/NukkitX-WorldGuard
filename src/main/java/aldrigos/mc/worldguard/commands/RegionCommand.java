@@ -1,5 +1,6 @@
 package aldrigos.mc.worldguard.commands;
 
+import aldrigos.mc.worldedit.WorldEdit;
 import aldrigos.mc.worldguard.*;
 import aldrigos.mc.worldguard.exceptions.AlreadyExistException;
 import cn.nukkit.Player;
@@ -8,19 +9,18 @@ import cn.nukkit.utils.*;
 
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 public class RegionCommand extends Command {
     public final RegionManager rgm;
-    public final Map<Long, Cuboid> selection;
+    public final WorldEdit we;
     public final Logger log;
     private final FlagsCommands flagsCmds;
 
     public RegionCommand(WorldGuardPlugin p){
         super("rg");
         rgm = p.RegionManager;
-        selection = p.Selection;
+        we = p.worldEdit;
         log = p.getLogger();
         flagsCmds = new FlagsCommands(p);
     }
@@ -66,7 +66,7 @@ public class RegionCommand extends Command {
             return false;
         }
 
-        var cuboid = selection.get(player.getId());
+        var cuboid = we.getSelection(player.getId());
         if(cuboid == null || cuboid.P1 == null || cuboid.P2 == null){
             Messages.NO_SELECTION.send(player);
             return false;
@@ -161,7 +161,7 @@ public class RegionCommand extends Command {
             return false;
         }
 
-        var cuboid = selection.get(player.getId());
+        var cuboid = we.getSelection(player.getId());
         if(cuboid == null || cuboid.P1 == null || cuboid.P2 == null){
             Messages.NO_SELECTION.send(player);
             return false;

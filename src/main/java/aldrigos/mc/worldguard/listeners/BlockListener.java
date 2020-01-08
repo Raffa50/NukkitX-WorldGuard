@@ -11,11 +11,9 @@ import java.util.Map;
 
 public class BlockListener implements Listener {
     public final RegionManager rgm;
-    private final Map<Long, Cuboid> selection;
 
     public BlockListener(WorldGuardPlugin p){
         rgm = p.RegionManager;
-        selection = p.Selection;
     }
 
     private Region check(Player p, BlockEvent e){
@@ -40,18 +38,6 @@ public class BlockListener implements Listener {
     @EventHandler
     public void onBreak(BlockBreakEvent e){
         var player = e.getPlayer();
-        //check if player has wg rg stick
-        if(player.isCreative() && e.getItem().getId() == ItemID.STICK){
-            var clickPosition = e.getBlock().getLocation();
-            if(!selection.containsKey(player.getId()))
-                selection.put(player.getId(), new Cuboid());
-
-            selection.get(player.getId()).P1 = new Vector3Adapter(clickPosition);
-            player.sendMessage(TextFormat.DARK_PURPLE+"[WG]First position set "+Utils.toString(clickPosition)+TextFormat.WHITE);
-
-            e.setCancelled();
-            return;
-        }
 
         var region = check(player, e);
         if(region == null)

@@ -1,5 +1,7 @@
 package aldrigos.mc.worldguard;
 
+import aldrigos.mc.worldedit.Cuboid;
+
 import java.util.Collection;
 import java.util.HashSet;
 
